@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nemolib"
+version = "0.3.0"
+description = "Lightweight NeMO encoder/decoder - encode images to NeMO vectors and run decoder predictions."
+authors = [ { name = "Sebastian Jung" } ]
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    'einops>=0.7.0',
+    'pillow~=11.3',
+    'matplotlib~=3.9',
+    'opencv-python>=4.12.0',
+    'plotly~=6.5.0',
+    'scikit-learn~=1.6.1',
+    'omegaconf~=2.3.0',
+    'kaleido~=1.2.0',
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
