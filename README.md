@@ -7,7 +7,7 @@
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License"></a>
 </p>
 <p align="center">
-  <a href="https://sebastian-jung.github.io/">Sebastian Jung</a>, Leonard Klüpfel, Rudolph Triebel, Maximilian Durner
+  <a href="https://sebastian-jung.github.io/">Sebastian Jung</a>, <a href="https://scholar.google.com/citations?user=Tqik_XUAAAAJ&hl=de&oi=sra">Leonard Klüpfel</a>, <a href="https://scholar.google.com/citations?user=SuOUxjUAAAAJ&hl=de">Rudolph Triebel</a>, <a href="https://madurner.github.io/">Maximilian Durner</a>
 </p>
 <p align="center">
   German Aerospace Center (DLR)
