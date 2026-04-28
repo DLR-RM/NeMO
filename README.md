@@ -88,10 +88,10 @@ This codebase borrows code from [LEAP](https://hwjiang1510.github.io/LEAP/) and 
 ## 📖 Citation
 
 ```text
-@inproceedings{jung2026,
-  title={Finding NeMO: A Geometry-Aware Representation of Template Views for Few-Shot Perception},
-  author={Sebastian Jung and Leonard Klüpfel and Rudolph Triebel and Maximilian Durner},
-  journal={3DV},
-  year={2026}
+@inproceedings{jung2026nemo,
+  title     = {Finding NeMO: A Geometry-Aware Representation of Template Views for Few-Shot Perception},
+  author    = {Jung, Sebastian and Klüpfel, Leonard and Triebel, Rudolph and Durner, Maximilian},
+  booktitle = {International Conference on 3D Vision (3DV)},
+  year      = {2026},
 }
 ```
