@@ -3,7 +3,7 @@ import argparse
 from functools import partial
 from einops import rearrange
 from nemolib.model import Model
-from nemolib.utils import load_images, load_nemo, get_3d_bbox, rodrigues_rotation, batch_transform_points
+from nemolib.utils import load_images, load_nemo, get_3d_bbox, rodrigues_rotation, batch_transform_points, get_device
 from nemolib.visualization import save_point_cloud_html
 import glob
 import cv2
@@ -13,7 +13,7 @@ import numpy as np
 
 
 def main(args):
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    device = get_device()
     ckpt_path: str = args.checkpoint
     image_paths = sorted(glob.glob(args.image_glob))
     nemo_path = args.nemo_path

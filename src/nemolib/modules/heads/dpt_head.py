@@ -35,7 +35,7 @@ class DPTOutputAdapter_fix(DPTOutputAdapter):
         del self.act_3_postprocess
         del self.act_4_postprocess
         self.patch_linear = torch.nn.Linear(
-            self.num_channels * 16 * 16, self.num_channels * self.patch_size[0] * self.patch_size[1], device="cuda"
+            self.num_channels * 16 * 16, self.num_channels * self.patch_size[0] * self.patch_size[1]
         )
 
     def forward(self, encoder_tokens: list[torch.Tensor], image_size=None):

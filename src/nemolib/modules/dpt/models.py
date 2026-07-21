@@ -153,7 +153,7 @@ class DPTPointMapConfidenceModel(DPT):
             nn.Conv2d(32, self.num_channels, kernel_size=1, stride=1, padding=0),
         )
         self.patch_linear = nn.Linear(
-            self.num_channels * 16 * 16, self.num_channels * self.patch_size[0] * self.patch_size[1], device="cuda"
+            self.num_channels * 16 * 16, self.num_channels * self.patch_size[0] * self.patch_size[1]
         )
 
     def forward(self, tokens: list, image_size):

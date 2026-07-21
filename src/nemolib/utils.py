@@ -2,6 +2,7 @@
 
 Includes checkpoint loading, image preprocessing and tensor helpers.
 """
+import time
 from typing import Any, Optional, Sequence, Union
 import torch
 from PIL import Image
@@ -12,6 +13,29 @@ from matplotlib import pyplot as plt
 
 import cv2
 
+
+
+def read_frame(cap, retries: int = 30, delay: float = 0.1):
+    """Read a frame from a cv2.VideoCapture, tolerating transient failures.
+
+    Cameras can return failed reads right after opening (e.g. ~1s warmup on
+    macOS), which should not be treated as end-of-stream.
+    """
+    for _ in range(retries):
+        ret, frame = cap.read()
+        if ret:
+            return True, frame
+        time.sleep(delay)
+    return False, None
+
+
+def get_device() -> torch.device:
+    """Return the best available device: CUDA, then MPS (Apple Silicon), then CPU."""
+    if torch.cuda.is_available():
+        return torch.device("cuda:0")
+    if torch.backends.mps.is_available():
+        return torch.device("mps")
+    return torch.device("cpu")
 
 
 def confidence_to_imgs(confidence: np.ndarray, expected_max: float, colormap: str = "jet"):

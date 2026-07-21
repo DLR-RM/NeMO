@@ -120,7 +120,7 @@ class Model(nn.Module):
         The returned encoder expects to be used for inference (eval mode).
         """
         if isinstance(ckpt, str):
-            ckpt = torch.load(ckpt, weights_only=False)
+            ckpt = torch.load(ckpt, weights_only=False, map_location=device or "cpu")
         initial_state_dict = ckpt["state_dict"]
         # Remove `model.` prefix from state_dict
         state_dict = {}
@@ -582,9 +582,11 @@ class DenseXYZPredictor(nn.Module):
         b, t, fc, fh, fw = img_features.shape
         features_2d = rearrange(img_features, "b t c h w -> (b t) (h w) c")
 
+        # .contiguous() materializes the broadcast view; MPS attention kernels
+        # cannot handle the zero-stride expand and abort otherwise.
         features_3d_updated = einops.repeat(
             features_3d, "b n c -> (b copy) n c", copy=t
-        )
+        ).contiguous()
 
         features_2d_list = [features_2d]
         # DECODER

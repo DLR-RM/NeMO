@@ -7,7 +7,7 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import minmax_scale
 from nemolib.model import Model
 from nemolib.visualization import get_point_cloud_image
-from nemolib.utils import save_nemo, load_images, center_crop
+from nemolib.utils import save_nemo, load_images, center_crop, get_device, read_frame
 
 def main():
     parser = argparse.ArgumentParser()
@@ -21,7 +21,7 @@ def main():
     parser.add_argument("--object-name", default=None, type=str, help="Name of the object. Will be used to create the output folder.")
     args = parser.parse_args()
 
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    device = get_device()
     camera_id = args.camera_id
     # Ask the user for object name
     object_name = args.object_name
@@ -45,11 +45,11 @@ def main():
     print("Press ENTER to capture an image, 'q' to finish capturing and generate NeMO.")
     
     while True:
-        ret, frame = cap.read()
-        frame = center_crop(frame)
+        ret, frame = read_frame(cap)
         if not ret:
             print("Failed to grab frame")
             break
+        frame = center_crop(frame)
 
         # Display the live feed
         display_frame = frame.copy()

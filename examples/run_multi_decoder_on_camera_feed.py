@@ -6,7 +6,7 @@ import argparse
 from einops import rearrange
 from nemolib.model import Model
 from nemolib.visualization import get_prediction_image_from_decoder_output
-from nemolib.utils import load_nemo, image_to_tensor, center_crop
+from nemolib.utils import load_nemo, image_to_tensor, center_crop, get_device, read_frame
 import cv2
 import torch
 import os
@@ -45,7 +45,7 @@ def load_nemo_features(nemo_names, device, base_path="out"):
     return features_batch
 
 def main(args):
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    device = get_device()
 
     # Ask which NeMOs to load
     selected_nemos = select_nemos()
@@ -62,7 +62,7 @@ def main(args):
 
     print("Press 'q' to quit.")
     while True:
-        ret, frame_bgr = cap.read()
+        ret, frame_bgr = read_frame(cap)
         if not ret:
             print("Failed to grab frame.")
             break

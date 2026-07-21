@@ -6,7 +6,7 @@ import copy
 from typing import Optional
 from einops import rearrange
 from nemolib.model import Model
-from nemolib.utils import load_nemo, image_to_tensor, scale_images, masks_to_bounding_boxes
+from nemolib.utils import load_nemo, image_to_tensor, scale_images, masks_to_bounding_boxes, get_device
 import cv2
 import torch
 import os
@@ -172,7 +172,7 @@ colors = [
 
 
 def main(args):
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    device = get_device()
 
     ckpt_path = args.checkpoint
     nemo_path = args.nemo_path
