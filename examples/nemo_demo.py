@@ -21,7 +21,7 @@ from nemolib.visualization import (
 )
 from nemolib.utils import (
     save_nemo, load_images, center_crop,
-    get_3d_bbox, image_to_tensor
+    get_3d_bbox, image_to_tensor, get_device, read_frame
 )
 
 
@@ -86,7 +86,7 @@ def main():
     parser.add_argument("--skip-live", action="store_true")
     args = parser.parse_args()
 
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    device = get_device()
 
     print(f"--- Phase 1: Initializing Model on {device} ---")
     model = Model.from_checkpoint(args.checkpoint, device=device)
@@ -130,7 +130,7 @@ def main():
     captured_paths = []
 
     while cap.isOpened():
-        ret, frame = cap.read()
+        ret, frame = read_frame(cap)
         if not ret:
             break
 
@@ -276,7 +276,7 @@ def main():
     cap = open_camera(camera_id)
 
     while True:
-        ret, frame_bgr = cap.read()
+        ret, frame_bgr = read_frame(cap)
         if not ret:
             break
 

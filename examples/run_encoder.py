@@ -4,7 +4,7 @@ from einops import rearrange
 from nemolib.model import Model
 import glob
 from nemolib.visualization import get_point_cloud_image
-from nemolib.utils import load_images, save_nemo
+from nemolib.utils import load_images, save_nemo, get_device
 import cv2
 import torch
 from sklearn.decomposition import PCA
@@ -13,7 +13,7 @@ import os
 
 
 def main(args):
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    device = get_device()
     ckpt_path: str = args.checkpoint
     image_paths = sorted(glob.glob(args.image_glob))
     print(image_paths)

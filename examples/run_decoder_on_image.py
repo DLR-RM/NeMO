@@ -3,14 +3,14 @@ import argparse
 from einops import rearrange
 from nemolib.model import Model
 from nemolib.visualization import get_prediction_image_from_decoder_output
-from nemolib.utils import load_image, load_nemo
+from nemolib.utils import load_image, load_nemo, get_device
 import cv2
 import torch
 import os
 
 
 def main(args):
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    device = get_device()
     ckpt_path: str = args.checkpoint
     image_path = args.image_path
     nemo_path = args.nemo_path
